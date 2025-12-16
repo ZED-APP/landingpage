@@ -182,73 +182,74 @@
   </div>
 
   <script>
-    const whatsappNumber = "213000000000"; // replace with your WhatsApp number (international format)
+    const whatsappNumber = "213661234567"; // CHANGE THIS
     let cart = [];
 
-    function updateCartSummary() {
+    function updateCart() {
       const summary = document.getElementById('cartSummary');
       const totalEl = document.getElementById('totalPrice');
+      summary.innerHTML = '';
       let total = 0;
 
-      summary.innerHTML = '';
       cart.forEach((item, index) => {
-        total += item.price;
-        summary.innerHTML += `<div>• ${item.name} - $${item.price.toFixed(2)}</div>`;
+        const itemTotal = item.price * item.qty;
+        total += itemTotal;
+        summary.innerHTML += `
+          <div class="cart-item">
+            <span>${item.name} x${item.qty}</span>
+            <span>$${itemTotal.toFixed(2)} <span class="remove" onclick="removeItem(${index})">✖</span></span>
+          </div>`;
       });
 
       totalEl.innerText = `$${total.toFixed(2)}`;
     }
 
-    document.querySelectorAll('.buy-btn').forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        const product = e.target.closest('.product');
-        const name = product.querySelector('h3').innerText;
-        const price = parseFloat(product.querySelector('.price').innerText.replace('$', ''));
+    function removeItem(i) {
+      cart.splice(i, 1);
+      updateCart();
+    }
 
-        cart.push({ name, price });
-        updateCartSummary();
-        alert(`${name} added to cart`);
-      });
+    document.querySelectorAll('.product').forEach(product => {
+      let qty = 1;
+      const plus = product.querySelector('.plus');
+      const minus = product.querySelector('.minus');
+      const qtyEl = product.querySelector('.qty-value');
+
+      plus.onclick = () => { qty++; qtyEl.innerText = qty; };
+      minus.onclick = () => { if (qty > 1) qty--; qtyEl.innerText = qty; };
+
+      product.querySelector('.buy-btn').onclick = () => {
+        const name = product.querySelector('h3').innerText;
+        const price = parseFloat(product.querySelector('.price').innerText.replace('$',''));
+        cart.push({ name, price, qty });
+        updateCart();
+        qty = 1;
+        qtyEl.innerText = 1;
+      };
     });
 
-    document.querySelector('form').addEventListener('submit', function (e) {
+    document.querySelector('form').addEventListener('submit', function(e){
       e.preventDefault();
+      if(cart.length===0){ alert('Cart is empty'); return; }
 
-      if (cart.length === 0) {
-        alert('Your cart is empty.');
-        return;
-      }
+      const name=this.querySelector('input[type=text]').value;
+      const phone=this.querySelector('input[type=tel]').value;
+      const address=this.querySelector('textarea').value;
 
-      const name = this.querySelector('input[type="text"]').value;
-      const email = this.querySelector('input[type="email"]').value;
-      const phone = this.querySelector('input[type="tel"]').value;
-      const address = this.querySelector('textarea').value;
+      let msg='🛒 *New Order*
 
-      let message = `🛒 *New Order*
+';
+      let total=0;
+      cart.forEach(i=>{ total+=i.price*i.qty; msg+=`• ${i.name} x${i.qty} = $${(i.price*i.qty).toFixed(2)}
+`;});
+      msg+=`
+💰 Total: $${total.toFixed(2)}
 
-`;
-      let total = 0;
+👤 ${name}
+📞 ${phone}
+📍 ${address}`;
 
-      cart.forEach((item) => {
-        message += `• ${item.name} - $${item.price.toFixed(2)}
-`;
-        total += item.price;
-      });
-
-      message += `
-💰 *Total:* $${total.toFixed(2)}
-
-`;
-      message += `👤 Name: ${name}
-`;
-      message += `📧 Email: ${email}
-`;
-      message += `📞 Phone: ${phone}
-`;
-      message += `📍 Address: ${address}`;
-
-      const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
+      window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`,'_blank');
     });
   </script>
 </body>
