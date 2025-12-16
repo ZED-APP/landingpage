@@ -238,5 +238,66 @@
 
   </div>
 
+  <script>
+    const whatsappNumber = "213000000000"; // replace with your WhatsApp number (international format)
+    let cart = [];
+
+    function updateCartSummary() {
+      const summary = document.getElementById('cartSummary');
+      const totalEl = document.getElementById('totalPrice');
+      let total = 0;
+
+      summary.innerHTML = '';
+      cart.forEach((item, index) => {
+        total += item.price;
+        summary.innerHTML += `<div>• ${item.name} - $${item.price.toFixed(2)}</div>`;
+      });
+
+      totalEl.innerText = `$${total.toFixed(2)}`;
+    }
+
+    document.querySelectorAll('.buy-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const product = e.target.closest('.product');
+        const name = product.querySelector('h3').innerText;
+        const price = parseFloat(product.querySelector('.price').innerText.replace('$', ''));
+
+        cart.push({ name, price });
+        updateCartSummary();
+        alert(`${name} added to cart`);
+      });
+    });
+
+    document.querySelector('form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      if (cart.length === 0) {
+        alert('Your cart is empty.');
+        return;
+      }
+
+      const name = this.querySelector('input[type="text"]').value;
+      const email = this.querySelector('input[type="email"]').value;
+      const phone = this.querySelector('input[type="tel"]').value;
+      const address = this.querySelector('textarea').value;
+
+      let message = `🛒 *New Order*\n\n`;
+      let total = 0;
+
+      cart.forEach((item) => {
+        message += `• ${item.name} - $${item.price.toFixed(2)}\n`;
+        total += item.price;
+      });
+
+      message += `\n💰 *Total:* $${total.toFixed(2)}\n\n`;
+      message += `👤 Name: ${name}\n`;
+      message += `📧 Email: ${email}\n`;
+      message += `📞 Phone: ${phone}\n`;
+      message += `📍 Address: ${address}`;
+
+      const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    });
+  </script>
 </body>
 </html>
