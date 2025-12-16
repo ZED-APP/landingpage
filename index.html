@@ -1,256 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modern Glassmorphism Shop</title>
-  <style>
-    :root {
-      --glass-bg: rgba(255, 255, 255, 0.15);
-      --glass-border: rgba(255, 255, 255, 0.3);
-      --accent: #00d4ff;
-      --text: #ffffff;
-    }
+<meta charset="UTF-8">
+<title>Glass Shop – WhatsApp Order</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    * { box-sizing: border-box; font-family: "Segoe UI", Tahoma, sans-serif; }
-
-    body {
-      margin: 0; min-height: 100vh;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: var(--text);
-      display: flex; justify-content: center; align-items: center;
-      padding: 40px 20px;
-    }
-
-    .container {
-      max-width: 1200px; width: 100%;
-      display: grid; grid-template-columns: 2fr 1fr; gap: 30px;
-    }
-
-    h1, h2 { margin-top: 0; }
-
-    .glass {
-      background: var(--glass-bg);
-      backdrop-filter: blur(15px);
-      border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      padding: 25px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-    }
-
-    .products {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px;
-    }
-
-    .product img {
-      width: 100%; height: 160px; object-fit: cover; border-radius: 15px;
-    }
-
-    .price { color: var(--accent); font-weight: bold; }
-
-    .qty {
-      display: flex; justify-content: center; gap: 10px; margin: 10px 0;
-    }
-
-    .qty button {
-      width: 30px; height: 30px; border-radius: 50%; border: none; cursor: pointer;
-    }
-
-    .cart-item {
-      display: flex; justify-content: space-between; margin-bottom: 6px;
-    }
-
-    .remove { cursor: pointer; color: #ff6b6b; }
-
-    select, input, textarea {
-      width: 100%; padding: 10px; border-radius: 12px;
-      border: 1px solid var(--glass-border);
-      background: rgba(255,255,255,0.2); color: white;
-    }
-
-    .submit-btn {
-      width: 100%; padding: 12px; margin-top: 10px;
-      border-radius: 25px; border: none; cursor: pointer;
-      background: linear-gradient(135deg,#25d366,#128c7e);
-      color: white; font-size: 1rem;
-    }
-
-    .success { display:none; text-align:center; font-size:1.2rem; }
-
-    @media(max-width:900px){ .container{ grid-template-columns:1fr;} }
-  </style>
+<style>
+:root{
+  --glass: rgba(255,255,255,0.15);
+  --border: rgba(255,255,255,0.3);
+  --accent: #25d366;
+  --text: #fff;
+}
+*{box-sizing:border-box;font-family:Segoe UI,Tahoma,sans-serif}
+body{
+  margin:0;min-height:100vh;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color:var(--text);
+  padding:30px;
+}
+.container{
+  max-width:1200px;margin:auto;
+  display:grid;grid-template-columns:2fr 1fr;gap:25px;
+}
+.glass{
+  background:var(--glass);
+  backdrop-filter:blur(15px);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px;
+}
+.products{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:15px;
+}
+.product img{
+  width:100%;height:150px;object-fit:cover;border-radius:15px;
+}
+.price{color:#00d4ff;font-weight:bold}
+.qty{
+  display:flex;justify-content:center;gap:10px;margin:10px 0;
+}
+.qty button{
+  width:30px;height:30px;border-radius:50%;
+  border:none;cursor:pointer;font-weight:bold;
+}
+.buy-btn,.submit-btn{
+  width:100%;padding:10px;border:none;border-radius:25px;
+  background:linear-gradient(135deg,#25d366,#128c7e);
+  color:#fff;font-weight:bold;cursor:pointer;
+}
+.cart-item{
+  display:flex;justify-content:space-between;margin-bottom:6px;
+}
+.remove{cursor:pointer;color:#ff6b6b}
+input,textarea{
+  width:100%;padding:10px;margin-bottom:10px;
+  border-radius:12px;border:1px solid var(--border);
+  background:rgba(255,255,255,0.2);color:#fff;
+}
+@media(max-width:900px){.container{grid-template-columns:1fr}}
+</style>
 </head>
+
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <!-- Products section -->
-    <div class="glass">
-      <h1>🛒 Our Products</h1>
-      <div class="products">
+<!-- PRODUCTS -->
+<div class="glass">
+<h2>🛍 Products</h2>
+<div class="products">
 
-        <div class="product glass">
-          <img src="https://picsum.photos/400/300?1" alt="Product 1">
-          <h3>Product One</h3>
-          <div class="price">$19.99</div>
-          <button class="buy-btn">Buy</button>
-        </div>
-
-        <div class="product glass">
-          <img src="https://picsum.photos/400/300?2" alt="Product 2">
-          <h3>Product Two</h3>
-          <div class="price">$24.99</div>
-          <button class="buy-btn">Buy</button>
-        </div>
-
-        <div class="product glass">
-          <img src="https://picsum.photos/400/300?3" alt="Product 3">
-          <h3>Product Three</h3>
-          <div class="price">$29.99</div>
-          <button class="buy-btn">Buy</button>
-        </div>
-
-        <div class="product glass">
-          <img src="https://picsum.photos/400/300?4" alt="Product 4">
-          <h3>Product Four</h3>
-          <div class="price">$34.99</div>
-          <button class="buy-btn">Buy</button>
-        </div>
-
-        <div class="product glass">
-          <img src="https://picsum.photos/400/300?5" alt="Product 5">
-          <h3>Product Five</h3>
-          <div class="price">$39.99</div>
-          <button class="buy-btn">Buy</button>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Buyer form -->
-    <div class="glass">
-      <h2>🧾 Cart</h2>
-      <div id="cartSummary" style="margin-bottom:10px;"></div>
-      <strong>Total: <span id="totalPrice">$0.00</span></strong>
-      <hr style="opacity:0.3;margin:15px 0;">
-
-      <h2>👤 Buyer Information</h2>
-      <form>
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" placeholder="John Doe" required />
-        </div>
-
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" placeholder="john@email.com" required />
-        </div>
-
-        <div class="form-group">
-          <label>Phone</label>
-          <input type="tel" placeholder="+213..." required />
-        </div>
-
-        <div class="form-group">
-          <label>Address</label>
-          <textarea placeholder="Your delivery address" required></textarea>
-        </div>
-
-        <button type="submit" class="submit-btn">Send Order via WhatsApp</button>
-      </form>
-    </div>
-
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" placeholder="john@email.com" required />
-        </div>
-
-        <div class="form-group">
-          <label>Phone</label>
-          <input type="tel" placeholder="+1 234 567 890" />
-        </div>
-
-        <div class="form-group">
-          <label>Address</label>
-          <textarea placeholder="Your delivery address"></textarea>
-        </div>
-
-        <button type="submit" class="submit-btn">Confirm Order</button>
-      </form>
-    </div>
-
+<div class="product glass">
+  <img src="https://picsum.photos/300?1">
+  <h3>Product One</h3>
+  <div class="price">$19.99</div>
+  <div class="qty">
+    <button class="minus">−</button>
+    <span class="qty-value">1</span>
+    <button class="plus">+</button>
   </div>
+  <button class="buy-btn">Add to Cart</button>
+</div>
 
-  <script>
-    const whatsappNumber = "213661234567"; // CHANGE THIS
-    let cart = [];
+<div class="product glass">
+  <img src="https://picsum.photos/300?2">
+  <h3>Product Two</h3>
+  <div class="price">$29.99</div>
+  <div class="qty">
+    <button class="minus">−</button>
+    <span class="qty-value">1</span>
+    <button class="plus">+</button>
+  </div>
+  <button class="buy-btn">Add to Cart</button>
+</div>
 
-    function updateCart() {
-      const summary = document.getElementById('cartSummary');
-      const totalEl = document.getElementById('totalPrice');
-      summary.innerHTML = '';
-      let total = 0;
+<div class="product glass">
+  <img src="https://picsum.photos/300?3">
+  <h3>Product Three</h3>
+  <div class="price">$39.99</div>
+  <div class="qty">
+    <button class="minus">−</button>
+    <span class="qty-value">1</span>
+    <button class="plus">+</button>
+  </div>
+  <button class="buy-btn">Add to Cart</button>
+</div>
 
-      cart.forEach((item, index) => {
-        const itemTotal = item.price * item.qty;
-        total += itemTotal;
-        summary.innerHTML += `
-          <div class="cart-item">
-            <span>${item.name} x${item.qty}</span>
-            <span>$${itemTotal.toFixed(2)} <span class="remove" onclick="removeItem(${index})">✖</span></span>
-          </div>`;
-      });
+</div>
+</div>
 
-      totalEl.innerText = `$${total.toFixed(2)}`;
-    }
+<!-- CART + FORM -->
+<div class="glass">
+<h2>🧾 Cart</h2>
+<div id="cart"></div>
+<strong>Total: <span id="total">$0.00</span></strong>
 
-    function removeItem(i) {
-      cart.splice(i, 1);
-      updateCart();
-    }
+<hr style="opacity:.3;margin:15px 0">
 
-    document.querySelectorAll('.product').forEach(product => {
-      let qty = 1;
-      const plus = product.querySelector('.plus');
-      const minus = product.querySelector('.minus');
-      const qtyEl = product.querySelector('.qty-value');
+<h2>👤 Buyer Info</h2>
+<form id="orderForm">
+  <input type="text" placeholder="Full Name" required>
+  <input type="tel" placeholder="Phone" required>
+  <textarea placeholder="Address" required></textarea>
+  <button class="submit-btn">Order via WhatsApp</button>
+</form>
+</div>
 
-      plus.onclick = () => { qty++; qtyEl.innerText = qty; };
-      minus.onclick = () => { if (qty > 1) qty--; qtyEl.innerText = qty; };
+</div>
 
-      product.querySelector('.buy-btn').onclick = () => {
-        const name = product.querySelector('h3').innerText;
-        const price = parseFloat(product.querySelector('.price').innerText.replace('$',''));
-        cart.push({ name, price, qty });
-        updateCart();
-        qty = 1;
-        qtyEl.innerText = 1;
-      };
-    });
+<script>
+const whatsappNumber="213661234567"; // CHANGE THIS
+let cart=[];
 
-    document.querySelector('form').addEventListener('submit', function(e){
-      e.preventDefault();
-      if(cart.length===0){ alert('Cart is empty'); return; }
+function updateCart(){
+  const cartDiv=document.getElementById("cart");
+  const totalEl=document.getElementById("total");
+  cartDiv.innerHTML="";
+  let total=0;
 
-      const name=this.querySelector('input[type=text]').value;
-      const phone=this.querySelector('input[type=tel]').value;
-      const address=this.querySelector('textarea').value;
+  cart.forEach((p,i)=>{
+    const sum=p.price*p.qty;
+    total+=sum;
+    cartDiv.innerHTML+=`
+      <div class="cart-item">
+        <span>${p.name} × ${p.qty}</span>
+        <span>$${sum.toFixed(2)} <span class="remove" onclick="removeItem(${i})">✖</span></span>
+      </div>`;
+  });
+  totalEl.textContent="$"+total.toFixed(2);
+}
 
-      let msg='🛒 *New Order*
+function removeItem(i){
+  cart.splice(i,1);
+  updateCart();
+}
 
-';
-      let total=0;
-      cart.forEach(i=>{ total+=i.price*i.qty; msg+=`• ${i.name} x${i.qty} = $${(i.price*i.qty).toFixed(2)}
-`;});
-      msg+=`
-💰 Total: $${total.toFixed(2)}
+document.querySelectorAll(".product").forEach(prod=>{
+  let qty=1;
+  const qEl=prod.querySelector(".qty-value");
 
-👤 ${name}
-📞 ${phone}
-📍 ${address}`;
+  prod.querySelector(".plus").onclick=()=>{qty++;qEl.textContent=qty;}
+  prod.querySelector(".minus").onclick=()=>{if(qty>1)qty--;qEl.textContent=qty;}
 
-      window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`,'_blank');
-    });
-  </script>
+  prod.querySelector(".buy-btn").onclick=()=>{
+    const name=prod.querySelector("h3").textContent;
+    const price=parseFloat(prod.querySelector(".price").textContent.replace("$",""));
+    const exist=cart.find(p=>p.name===name);
+    if(exist) exist.qty+=qty;
+    else cart.push({name,price,qty});
+    qty=1;qEl.textContent=1;
+    updateCart();
+  };
+});
+
+document.getElementById("orderForm").onsubmit=e=>{
+  e.preventDefault();
+  if(cart.length===0){alert("Cart empty");return;}
+
+  const name=e.target[0].value;
+  const phone=e.target[1].value;
+  const address=e.target[2].value;
+
+  let msg="🛒 *New Order*\\n\\n";
+  let total=0;
+  cart.forEach(p=>{
+    const s=p.price*p.qty;
+    total+=s;
+    msg+=`• ${p.name} × ${p.qty} = $${s.toFixed(2)}\\n`;
+  });
+  msg+=`\\n💰 Total: $${total.toFixed(2)}\\n`;
+  msg+=`\\n👤 ${name}\\n📞 ${phone}\\n📍 ${address}`;
+
+  window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`,"_blank");
+};
+</script>
+
 </body>
 </html>
